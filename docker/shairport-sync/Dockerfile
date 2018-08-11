@@ -27,6 +27,7 @@ RUN git clone https://github.com/mikebrady/shairport-sync.git shairport-sync \
     && make \
     && make install
 
-COPY start-shairport-sync.sh /root
+COPY files/start-shairport-sync.sh /root
+COPY files/shairport-sync.conf /etc/shairport-sync.conf
 
 ENTRYPOINT [ "/root/start-shairport-sync.sh" ]

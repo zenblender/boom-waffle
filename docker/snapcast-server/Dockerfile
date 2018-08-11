@@ -13,4 +13,6 @@ RUN mkdir -p /root/.config/snapcast/
 
 EXPOSE 1704
 
-ENTRYPOINT ["snapserver"]
+COPY files/start.sh /start.sh
+
+ENTRYPOINT ["/start.sh"]

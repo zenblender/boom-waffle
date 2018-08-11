@@ -25,7 +25,7 @@ extra_vars="host=${pi_hostname}"
 # Define the new hostname for the pi if specified
 [[ -n $new_hostname ]] && extra_vars+=" new_hostname=${new_hostname}"
 
-ansible_args='-i '"${pi_hostname},"' --extra-vars '"${extra_vars}"
+ansible_args="-i ${pi_hostname},"
 
 # If we pass -p, ask for password
 [[ $ask_password == 'true' ]] && ansible_args+=' --ask-pass --ask-sudo'
@@ -33,4 +33,4 @@ ansible_args='-i '"${pi_hostname},"' --extra-vars '"${extra_vars}"
 cd $SCRIPT_PATH/../ansible
 
 #echo ansible-playbook "${ansible_args}" -u pi ansible/config-raspberry-pi.yml
-ansible-playbook ${ansible_args} -u pi config-raspberry-pi.yml
+ansible-playbook ${ansible_args} --extra-vars "${extra_vars}" -u pi config-raspberry-pi.yml

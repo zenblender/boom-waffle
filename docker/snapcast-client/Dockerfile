@@ -11,4 +11,6 @@ RUN apt-get -f install -y
 
 RUN apt-get update && apt-get install alsa-base alsa-utils -y
 
-ENTRYPOINT ["snapclient"]
+COPY files/start.sh /start.sh
+
+ENTRYPOINT ["/start.sh"]

@@ -21,4 +21,4 @@ done
 
 [[ -n "${pi_hostname}" ]] || { echo "usage: ./bin/rsync-to-pi.sh --hostname <pi hostname>"; exit 1; }
 
-rsync -avzru "${SCRIPT_PATH}/.." "pi@${pi_hostname}.local:/home/pi/boom-waffle"
+rsync -avzru "${SCRIPT_PATH}/.." "pi@${pi_hostname}:/home/pi/boom-waffle"

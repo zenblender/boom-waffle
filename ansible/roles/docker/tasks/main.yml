@@ -17,8 +17,29 @@
   tags:
   - docker
 
-- name: Install Docker (takes a while)
+- name: Install Docker (takes a few minutes)
   shell: /home/pi/get-docker.sh
   when: docker_installed_status.rc != 0
+  tags:
+  - docker
+
+- name: Install docker-compose dependences
+  become: yes
+  apt:
+    update_cache: yes
+    name: '{{ packages }}'
+  vars:
+    packages:
+      - python
+      - python-pip
+  tags:
+  - docker
+
+# 'creates' will skip the task if the file already exists
+# doing it this way makes the playbook run faster than using the 'pip' module
+- name: Install docker-compose
+  shell: pip install  --user docker-compose
+  args:
+    creates: /home/pi/.local/bin/docker-compose
   tags:
   - docker
