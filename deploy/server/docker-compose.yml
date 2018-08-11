@@ -1,0 +1,30 @@
+version: '3.2'
+
+services:
+  shairport-sync:
+    image: shairport-sync
+    privileged: true
+    network_mode: host
+    depends_on:
+    - snapcast-server
+    volumes:
+    - /var/run/dbus:/var/run/dbus
+    - /tmp/snapfifo
+
+  snapcast-server:
+    image:  snapcast-server
+    privileged: true
+    network_mode: host
+    volumes:
+    - /var/run/dbus:/var/run/dbus
+    - /tmp/snapfifo
+
+  snapcast-client:
+    image:  snapcast-client
+    privileged: true
+    network_mode: host
+    depends_on:
+    - snapcast-server
+    volumes:
+    - /var/run/dbus:/var/run/dbus
+    - /tmp/snapfifo
