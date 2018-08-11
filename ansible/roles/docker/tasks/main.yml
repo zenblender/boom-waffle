@@ -1,0 +1,24 @@
+---
+
+- name: Determine if Docker is installed
+  shell: type docker
+  ignore_errors: yes
+  changed_when: false
+  register: docker_installed_status
+  tags:
+  - docker
+
+- name: Download Docker install script
+  get_url:
+    url: https://get.docker.com
+    dest: /home/pi/get-docker.sh
+    mode: 0777
+  when: docker_installed_status.rc != 0
+  tags:
+  - docker
+
+- name: Install Docker (takes a while)
+  shell: /home/pi/get-docker.sh
+  when: docker_installed_status.rc != 0
+  tags:
+  - docker

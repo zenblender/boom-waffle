@@ -1,0 +1,27 @@
+---
+
+- name: Write hostname
+  become: yes
+  when: new_host is not undefined
+  copy:
+    content: "{{ new_host }}"
+    dest: /etc/hostname
+
+- name: Add user to 'docker' group
+  become: yes
+  user:
+    name: pi
+    group: docker
+    append: yes
+
+- name: Rsync repo to pi
+  synchronize:
+    src: '..'
+    dest: /home/pi/boom-waffle
+    recursive: yes
+
+- name: Set authorized key taken from file
+  authorized_key:
+    user: pi
+    state: present
+    key: "{{ lookup('file', '../secrets/id_rsa.pub') }}"

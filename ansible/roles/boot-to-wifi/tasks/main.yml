@@ -1,0 +1,11 @@
+---
+
+- name: Write SSH file to enable SSH login
+  copy:
+    content: ""
+    dest: /Volumes/boot/ssh
+
+- name: Write wpa_supplicant file
+  template:
+    src: wpa_supplicant.conf.j2
+    dest: /Volumes/boot/wpa_supplicant.conf

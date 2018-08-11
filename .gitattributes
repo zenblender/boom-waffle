@@ -1,0 +1,2 @@
+secrets/*  filter=crypt diff=crypt
+.sentinel  filter=crypt diff=crypt
