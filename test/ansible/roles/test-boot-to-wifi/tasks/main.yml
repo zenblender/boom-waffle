@@ -1,0 +1,13 @@
+---
+
+- name: Verify SSH file is written
+  shell: "[[ -f /Volumes/boot/ssh ]]"
+  changed_when: false
+
+- name: Verify ssid is written to wpa_supplicant.conf
+  shell: cat /Volumes/boot/wpa_supplicant.conf | grep 'ssid="{{ test_ssid }}"'
+  changed_when: false
+
+- name: Verify wifi-password is written to wpa_supplicant.conf
+  shell: cat /Volumes/boot/wpa_supplicant.conf | grep 'psk="{{ test_password }}"'
+  changed_when: false
