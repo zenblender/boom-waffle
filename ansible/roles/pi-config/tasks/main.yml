@@ -22,12 +22,12 @@
     group: docker
     append: yes
 
-- name: Rsync repo to pi
-  synchronize:
-    src: '..'
-    dest: /home/pi/boom-waffle
-    recursive: yes
-    archive: yes
+#- name: Rsync repo to pi
+#  synchronize:
+#    src: '..'
+#    dest: /home/pi/boom-waffle
+#    recursive: yes
+#    archive: yes
 
 - name: Set authorized key taken from file
   authorized_key:
