@@ -6,7 +6,7 @@
 # playbook isn't updating the files correctly so this must still be used
 
 # This is the path to the directory containing this script
-SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+script_path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Parse options
 while [[ $# -gt 0 ]]; do
@@ -21,4 +21,4 @@ done
 
 [[ -n "${pi_hostname}" ]] || { echo "usage: ./bin/rsync-to-pi.sh --hostname <pi hostname>"; exit 1; }
 
-rsync -avzru "${SCRIPT_PATH}/.." "pi@${pi_hostname}:/home/pi/boom-waffle"
+rsync -avzru "${script_path}/.." "pi@${pi_hostname}:/home/pi/boom-waffle"

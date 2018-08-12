@@ -1,6 +1,6 @@
 #/bin/bash -el
 
-SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+script_path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 docker-compose() {
   docker run \
@@ -10,4 +10,4 @@ docker-compose() {
     docker/compose:1.13.0 "$@"
 }
 
-docker-compose -f "$SCRIPT_PATH/docker-compose.yml"
+docker-compose -f "$script_path/docker-compose.yml"
