@@ -17,23 +17,23 @@ usage() {
 bin_path="${script_path}/../../bin"
 
 test_ssid="nvkdjnawe34234r"
-test_password="somepassword"
+test_password="some password"
 
 yellow "Running boot-to-wifi playbook"
 echo
 yellow "***********************"
-$bin_path/boot-to-wifi.sh --ssid $test_ssid --wifi-password $test_password
+$bin_path/boot-to-wifi.sh --ssid "${test_ssid}" --wifi-password "${test_password}"
 yellow "***********************"
 echo
 
-cd $script_path/../ansible
+cd "${script_path}/../ansible"
 
 yellow "Running test-boot-to-wifi playbook"
 echo
 yellow "***********************"
 echo
 set +e
-ansible-playbook -i '127.0.0.1,' --extra-vars "test_ssid=${test_ssid} test_password=${test_password}" test-boot-to-wifi.yml "$@"
+ansible-playbook -i '127.0.0.1,' --extra-vars "test_ssid='${test_ssid}' test_password='${test_password}'" test-boot-to-wifi.yml "$@"
 test_exit_code=$?
 set -e
 yellow "***********************"

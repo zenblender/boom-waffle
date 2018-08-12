@@ -31,4 +31,4 @@ done
 
 cd $script_path/../ansible
 
-ansible-playbook -i '127.0.0.1,' --extra-vars "ssid=${ssid} wifi_password=${wifi_password}" boot-to-wifi.yml
+ansible-playbook -i '127.0.0.1,' --extra-vars "ssid='${ssid}' wifi_password='${wifi_password}'" boot-to-wifi.yml
