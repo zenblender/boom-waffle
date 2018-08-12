@@ -1,6 +1,6 @@
 #!/bin/bash -el
 
-SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+script_path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 export ANSIBLE_HOST_KEY_CHECKING=false
 
@@ -30,7 +30,7 @@ ansible_args="-i ${pi_hostname},"
 # If we pass -p, ask for password
 [[ $ask_password == 'true' ]] && ansible_args+=' --ask-pass --ask-sudo'
 
-cd $SCRIPT_PATH/../ansible
+cd $script_path/../ansible
 
 #echo ansible-playbook "${ansible_args}" -u pi ansible/config-raspberry-pi.yml
 ansible-playbook ${ansible_args} --extra-vars "${extra_vars}" -u pi config-raspberry-pi.yml
