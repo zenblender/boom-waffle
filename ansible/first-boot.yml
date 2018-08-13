@@ -1,0 +1,6 @@
+---
+
+- hosts: "{{ host | default('new_pi') }}"
+  roles:
+  - configure-ssh-keys
+  - set-hostname

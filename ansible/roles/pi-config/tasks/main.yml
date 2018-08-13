@@ -1,20 +1,5 @@
 ---
 
-- name: Update /etc/hostname
-  become: yes
-  when: new_hostname is not undefined
-  copy:
-    content: "{{ new_hostname }}"
-    dest: /etc/hostname
-
-- name: Update /etc/hosts
-  become: yes
-  when: new_hostname is not undefined
-  lineinfile:
-    path: /etc/hosts
-    regexp: '127.0.1.1	raspberrypi'
-    line: "127.0.1.1	{{ new_hostname }}"
-
 - name: Add user to 'docker' group
   become: yes
   user:
@@ -28,12 +13,6 @@
 #    dest: /home/pi/boom-waffle
 #    recursive: yes
 #    archive: yes
-
-- name: Set authorized key taken from file
-  authorized_key:
-    user: pi
-    state: present
-    key: "{{ lookup('file', '../secrets/id_rsa.pub') }}"
 
 # Specifying a line w/o a regex parameter will append to the file
 - name: Add pip packages to .bashrc

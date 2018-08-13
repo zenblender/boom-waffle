@@ -21,4 +21,4 @@ done
 
 [[ -n "${pi_hostname}" ]] || { echo "usage: ./bin/rsync-to-pi.sh --hostname <pi hostname>"; exit 1; }
 
-rsync -avzru "${script_path}/.." "pi@${pi_hostname}:/home/pi/boom-waffle"
+rsync -e "ssh -o StrictHostKeyChecking=no" --exclude '.idea' --exclude '.git' --exclude '.cache' -avzru "${script_path}/.." "pi@${pi_hostname}:/home/pi/boom-waffle"
