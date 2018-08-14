@@ -1,0 +1,7 @@
+---
+
+- name: Add authorized key to Pi
+  authorized_key:
+    user: pi
+    state: present
+    key: "{{ lookup('file', '../secrets/id_rsa.pub') }}"

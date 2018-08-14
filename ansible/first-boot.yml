@@ -2,6 +2,5 @@
 
 - hosts: "{{ host | default('new_pi') }}"
   roles:
-  - rad-shell
-  - docker
-  - pi-config
+  - configure-ssh-keys
+  - set-hostname

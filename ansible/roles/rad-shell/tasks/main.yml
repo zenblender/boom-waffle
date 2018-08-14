@@ -1,0 +1,29 @@
+---
+
+- name: Install rad-shell dependencies
+  become: yes
+  apt:
+    update_cache: yes
+    name: '{{ packages }}'
+  vars:
+    packages:
+    - zsh
+    - git
+
+- name: Download rad-shell install script
+  get_url:
+    url: https://raw.githubusercontent.com/brandon-fryslie/rad-shell/master/install.sh
+    dest: /tmp/rad-shell-install.sh
+    mode: 0777
+
+- name: Install rad-shell
+  shell: bash /tmp/rad-shell-install.sh
+  args:
+    creates: /home/pi/.rad-shell
+
+#- name: Change user's default shell
+#  become: yes
+#  user:
+#    name: pi
+#    shell: zsh
+#    append: yes

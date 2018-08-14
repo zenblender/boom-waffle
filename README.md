@@ -56,23 +56,35 @@ Currently this needs to be done for each shell but it could be added to your
 - Have an available wifi network w/o a hidden SSID (pi's have problems with hidden ssid's)
 - These instructions only work with MacOS
 
-### Initial configuration (connecting to wireless network)
+### Flash the SD card and configure WiFi
 
-- Use Etcher to flash the latest Raspbian Stretch OS image to the card
-- Afterwards, remove the card and put it back into the so you have it mounted at `/Volumes/boot`
-- Run `./bin/boot-to-wifi.sh --ssid <your ssid> --wifi-password <your wifi password>`
-  - This enables SSH and sets the wifi credentials
-- Safely remove the SD card, put it in the pi, and plugin the pi into power
+- Run `diskutil list` to determine which device you want to flash
+  - e.g., `/dev/disk3`
+  - Make sure you pick the correct disk!
+- Run: `./bin/0-boot-to-wifi.sh --disk <your device> --ssid <your ssid> --wifi-password <your wifi password>` 
+  - This will: 
+    - Flash the Debian Stretch image using the etcher-cli
+    - Mount the disk again after flashing
+    - Run the `boot-to-wifi.yml` playbook
+    - Unmount the disk so it can be safely removed
+
 - You should now be able to connect to connect to the raspbarry pi on the network at `raspberrypi.local`
 - If not, figure out what went wrong and try again ;)
 
-### Release the Boomwaffle!
+### First boot configuration
 
-- Once you can successfully SSH into the pi, you can run the main configuration
-- Run `./bin/config-raspberry-pi-ansible.sh -p --hostname raspberrypi.local` to configure the pi
-  - Use `./bin/config-raspberry-pi-ansible.sh --hostname raspberrypi.local --new-hostname <your desired hostname>`
-    to set the hostname on the pi (only takes effect after a reboot)
-  - The `-p` option is required the first time you run the playbook, and will ask the raspberry pi password
-  - After the first time, this is not required as long as you run `eval $(./bin/add-ssh.sh)` from the repo directory to add the ssh-key
-- This installs docker and docker-compose, and copies the repo to the pi
+- This will set the hostname and configure SSH keys
+- Run: `./bin/1-first-boot.sh --new-hostname <new pi hostname>`
+  - You will be required to enter the password for the `pi` user, which is `raspberry`
+- The pi will restart after this step and come back online with the new hostname
+
+### Fully configure the Pi
+
+- Once you can successfully SSH into the pi using its new hostname, you can run the main configuration
+- Make sure to source the ssh key in this repo for passwordless login
+  - Run: `eval $(./bin/add-ssh.sh)`
+- Run `./bin/2-full-config.sh --hostname <pi hostname>` to configure the pi
+- This will:
+  - Install docker and docker-compose
+  - Install zsh, git, and rad-shell
 - After this, your pi will have all the necessary pieces ready to configure it

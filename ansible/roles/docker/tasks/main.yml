@@ -11,14 +11,14 @@
 - name: Download Docker install script
   get_url:
     url: https://get.docker.com
-    dest: /home/pi/get-docker.sh
+    dest: /tmp/get-docker.sh
     mode: 0777
   when: docker_installed_status.rc != 0
   tags:
   - docker
 
 - name: Install Docker (takes a few minutes)
-  shell: /home/pi/get-docker.sh
+  shell: /tmp/get-docker.sh
   when: docker_installed_status.rc != 0
   tags:
   - docker

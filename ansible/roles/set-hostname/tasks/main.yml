@@ -1,0 +1,25 @@
+---
+
+- name: Update /etc/hostname
+  become: yes
+  when: new_hostname is not undefined
+  copy:
+    content: "{{ new_hostname }}"
+    dest: /etc/hostname
+  register: hostname_changed
+
+- name: Update /etc/hosts
+  become: yes
+  when: new_hostname is not undefined
+  lineinfile:
+    path: /etc/hosts
+    regexp: '127.0.1.1	raspberrypi'
+    line: "127.0.1.1	{{ new_hostname }}"
+  register: hosts_changed
+
+- name: Reboot Pi for hostname changes to take effect
+  become: yes
+  when: hostname_changed is changed or hosts_changed is changed
+  shell: sleep 5 && reboot
+  async: 1
+  poll: 0

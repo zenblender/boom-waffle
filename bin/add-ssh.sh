@@ -1,6 +1,7 @@
 #!/bin/bash -el
 
 script_path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "${script_path}/_shared-scripts.sh"
 
 sentinel_value="$(cat $script_path/../.sentinel)"
 
