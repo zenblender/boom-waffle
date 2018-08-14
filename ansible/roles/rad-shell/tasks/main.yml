@@ -1,7 +1,7 @@
 ---
 
 - name: Determine if rad-shell is installed
-  shell: "[[ -d /home/pi/.rad-shell ]]"
+  shell: bash -c "[[ -d /home/pi/.rad-shell ]]"
   ignore_errors: yes
   changed_when: false
   register: rad_shell_installed_status
@@ -30,9 +30,15 @@
   args:
     creates: /home/pi/.rad-shell
 
-#- name: Change user's default shell
-#  become: yes
-#  user:
-#    name: pi
-#    shell: zsh
-#    append: yes
+- name: Change shell to Zsh
+  become: yes
+  lineinfile:
+    path: /etc/passwd
+    regexp: 'pi:x:1000:996:,,,:/home/pi:/bin/bash'
+    line: "pi:x:1000:996:,,,:/home/pi:/usr/bin/zsh"
+
+- name: Add boomwaffle-pi plugin to .rad-plugins
+  become: yes
+  lineinfile:
+    path: /home/pi/.rad-plugins
+    line: '/home/pi/boom-waffle/zsh-plugins/boomwaffle-pi/boomwaffle-pi.zsh'

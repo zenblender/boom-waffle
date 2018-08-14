@@ -1,7 +1,6 @@
+#export PATH="${PATH}:~/code/boom-waffle/bin"
 
-export PATH="${PATH}:~/code/boom-waffle/bin"
-
-# Add your boomwaffle ssh key to the ssh agent
-boomwaffle-ssh() {
-  eval $(~/code/boom-waffle/bin/add-ssh.sh)
+boom-build-all() {
+  rad-yellow "Building all boom-waffle docker images"
+  /home/pi/boom-waffle/docker/build_all.sh
 }
