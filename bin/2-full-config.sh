@@ -15,7 +15,6 @@ while [[ $# -gt 0 ]]; do
 
   case $key in
     --hostname) pi_hostname="$2"; shift; shift;;
-    -p) ask_password=true; shift;; # This only needs to be used once and then it will configure ssh keys
     *) red "Unknown option: $1"; exit 1;;
   esac
 done
@@ -27,17 +26,16 @@ yellow "Configuring pi with hostname: $(cyan "${pi_hostname}")"
 yellow "Removing hostname from authorized_keys file"
 ssh-keygen -R "${pi_hostname}" &>/dev/null
 
+yellow "Adding boomwaffle ssh key to ssh-agent"
+eval "$("${script_path}"/add-ssh.sh)"
+
 extra_vars="host=${pi_hostname}"
 
 ansible_args="-i ${pi_hostname},"
 
-# If we pass -p, ask for password
-[[ $ask_password == 'true' ]] && ansible_args+=' --ask-pass --ask-sudo'
-
 cd $script_path/../ansible
 
 yellow "Running ansible playbook config-raspberry-pi.yml"
-#echo ansible-playbook "${ansible_args}" -u pi ansible/config-raspberry-pi.yml
 ansible-playbook ${ansible_args} --extra-vars "${extra_vars}" -u pi config-raspberry-pi.yml
 
 green "Finished running config-raspberry-pi.yml playbook"

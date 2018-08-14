@@ -1,3 +1,3 @@
 #!/bin/bash -el
 
-snapserver -s "pipe:///tmp/snapfifo?name=Radio&sampleformat=44100:16:2"
+snapserver --sampleformat 44100:16:2 --codec flac --buffer 3000

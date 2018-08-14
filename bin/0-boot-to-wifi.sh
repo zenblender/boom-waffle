@@ -106,7 +106,7 @@ done
   flash_sd_card "${disk_to_flash}"
 
   green "Finished flashing SD card"
-  diskutil mountDisk "${disk_to_flash}"
+  sudo diskutil mountDisk "${disk_to_flash}"
 }
 
 cd $script_path/../ansible
@@ -118,5 +118,5 @@ ansible-playbook -i '127.0.0.1,' --extra-vars "ssid='${ssid}' wifi_password='${w
 
 green "Finished running playbook boot-to-wifi.yml"
 
-diskutil unmountDisk "${disk_to_flash}"
+sudo diskutil unmountDisk "${disk_to_flash}"
 green "Device ${disk_to_flash} was unmounted.  You can remove it now"
