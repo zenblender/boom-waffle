@@ -11,8 +11,6 @@ RUN apt-get -f install -y
 
 RUN mkdir -p /root/.config/snapcast/
 
-EXPOSE 1704
-
 COPY files/start.sh /start.sh
 
 ENTRYPOINT ["/start.sh"]
