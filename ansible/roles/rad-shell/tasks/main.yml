@@ -1,7 +1,14 @@
 ---
 
+- name: Determine if rad-shell is installed
+  shell: "[[ -d /home/pi/.rad-shell ]]"
+  ignore_errors: yes
+  changed_when: false
+  register: rad_shell_installed_status
+
 - name: Install rad-shell dependencies
   become: yes
+  when: rad_shell_installed_status.rc != 0
   apt:
     update_cache: yes
     name: '{{ packages }}'
@@ -11,12 +18,14 @@
     - git
 
 - name: Download rad-shell install script
+  when: rad_shell_installed_status.rc != 0
   get_url:
     url: https://raw.githubusercontent.com/brandon-fryslie/rad-shell/master/install.sh
     dest: /tmp/rad-shell-install.sh
     mode: 0777
 
 - name: Install rad-shell
+  when: rad_shell_installed_status.rc != 0
   shell: bash /tmp/rad-shell-install.sh
   args:
     creates: /home/pi/.rad-shell
