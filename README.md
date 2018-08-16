@@ -76,6 +76,7 @@ Currently this needs to be done for each shell but it could be added to your
 - This will set the hostname and configure SSH keys
 - Run: `./bin/1-first-boot.sh --new-hostname <new pi hostname>`
   - You will be required to enter the password for the `pi` user, which is `raspberry`
+  - Your desired hostname will have .local appended to it by some sort of mDNS magic
 - The pi will restart after this step and come back online with the new hostname
 
 ### Fully configure the Pi
@@ -88,3 +89,11 @@ Currently this needs to be done for each shell but it could be added to your
   - Install docker and docker-compose
   - Install zsh, git, and rad-shell
 - After this, your pi will have all the necessary pieces ready to configure it
+
+## Zsh Plugins
+
+There are two plugins, one for your development machine and one that will be
+installed on the pi.
+
+[boomwaffle-local-dev readme](./zsh-plugins/boomwaffle-local-dev/README.md)
+[boomwaffle-pi readme](./zsh-plugins/boomwaffle-pi/README.md)

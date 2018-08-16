@@ -11,6 +11,7 @@ RUN apt-get -f install -y
 
 RUN mkdir -p /root/.config/snapcast/
 
+COPY files/server.json /var/lib/snapserver/server.json
 COPY files/start.sh /start.sh
 
 ENTRYPOINT ["/start.sh"]

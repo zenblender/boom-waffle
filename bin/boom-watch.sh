@@ -5,12 +5,11 @@ source "${script_path}/_shared-scripts.sh"
 
 BOOMWAFFLE_PATH="$HOME/code/boom-waffle"
 
-#fswatch -0 "${BOOMWAFFLE_PATH}" | while read -d "" event; do \
-#  # do something with ${event}
-#  echo "do something with ${event}"
-#done
+[[ -n $1 ]] || { yellow "usage: ./bin/boom-watch.sh <hostname>"; exit 1; }
+hostname=$1
 
 yellow "Watching path $(cyan "${BOOMWAFFLE_PATH}")"
+yellow "Rsyncing to host $(cyan "${hostname}")"
 
 fswatch -0 "${BOOMWAFFLE_PATH}" \
   -e ".git/" \
@@ -20,7 +19,7 @@ fswatch -0 "${BOOMWAFFLE_PATH}" \
   | while read -d "" event; do
     echo
     yellow "*** Rsync starting ***"
-    "${BOOMWAFFLE_PATH}/bin/rsync-to-pi.sh" --hostname wafflemini-1.local
+    "${BOOMWAFFLE_PATH}/bin/rsync-to-pi.sh" --hostname "${hostname}"
     yellow "*** Rsync finished ***"
     echo
 done
