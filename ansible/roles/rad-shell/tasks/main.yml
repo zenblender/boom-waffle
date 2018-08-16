@@ -32,10 +32,7 @@
 
 - name: Change shell to Zsh
   become: yes
-  lineinfile:
-    path: /etc/passwd
-    regexp: 'pi:x:1000:996:,,,:/home/pi:/bin/bash'
-    line: "pi:x:1000:996:,,,:/home/pi:/usr/bin/zsh"
+  shell: usermod --shell /bin/zsh pi
 
 - name: Add boomwaffle-pi plugin to .rad-plugins
   become: yes

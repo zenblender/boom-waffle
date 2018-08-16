@@ -16,31 +16,6 @@ do_ping() {
   return $?
 }
 
-# Wait for raspberri pi to start up
-wait_for_pi() {
-  local hostname=$1
-  set +e
-  local counter=0
-  local max_tries=60
-
-  yellow "Waiting for pi to start up at hostname: ${hostname}"
-
-  while true; do
-    do_ping "${hostname}"
-    if [[ $? == 0 ]]; then
-      green "Pi started successfully"
-      break
-    elif [[ "${counter}" == "${max_tries}" ]]; then
-      red "Raspberry Pi did not start up in ${counter}s.  Exiting"
-      exit 1
-    else
-      ((counter++))
-      yellow "Waiting for pi to start.  It's been ${counter}s"
-    fi
-  done
-  set -e
-}
-
 # Parse options
 while [[ $# -gt 0 ]]; do
   key="$1"
@@ -55,7 +30,8 @@ done
 
 pi_hostname='raspberrypi.local'
 
-yellow "Configuring pi with hostname: $(cyan "${new_hostname}")"
+yellow "Configuring pi with hostname: $(cyan "${pi_hostname}")"
+yellow "New hostname will be: $(cyan "${new_hostname}.local")"
 
 yellow "Removing hostname from authorized_keys file"
 ssh-keygen -R "${pi_hostname}" &>/dev/null
@@ -71,7 +47,7 @@ green "Finished running first-boot.yml playbook"
 
 # Take into account the .local
 new_hostname_full="${new_hostname}.local"
-wait_for_pi "${new_hostname_full}"
+"${script_path}/wait-for-pi.sh" "${new_hostname_full}"
 
 echo
-green "Your pi is now available at hostname: $(cyan "${new_hostname_full}")"
+green "Your pi is now available at hostname: $(cyan "${new_hostname_full}.local")"
