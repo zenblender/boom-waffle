@@ -1,3 +1,3 @@
 #!/bin/bash -el
 
-snapclient --soundcard 1 -h snapcast-server
+snapclient --soundcard $SOUNDCARD_ID -h $SNAPCAST_SERVER_HOSTNAME
