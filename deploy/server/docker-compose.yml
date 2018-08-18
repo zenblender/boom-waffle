@@ -1,10 +1,19 @@
 version: '3.2'
 
 services:
+  access-point:
+    image: access-point
+    privileged: true
+    network_mode: host
+    volumes:
+      - /var/run/dbus:/var/run/dbus
+
   shairport-sync:
     image: shairport-sync
     privileged: true
     network_mode: host
+    depends_on:
+      - access-point
     volumes:
       - /var/run/dbus:/var/run/dbus
       - tmp-volume:/tmp
