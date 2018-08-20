@@ -16,7 +16,7 @@ wait_for_pi() {
   local counter=0
   local max_tries=60
 
-  yellow "Waiting for pi to start up at hostname: $(cyan hostname)"
+  yellow "Waiting for pi to start up at hostname: $(cyan "${hostname}")"
 
   while true; do
     do_ping "${hostname}"
