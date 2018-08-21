@@ -1,0 +1,5 @@
+---
+
+- name: Disable power-saving mode on wlan0
+  become: yes
+  shell: iw dev wlan0 set power_save off

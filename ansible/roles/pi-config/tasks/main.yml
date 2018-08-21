@@ -19,10 +19,3 @@
   lineinfile:
     dest: /home/pi/.bashrc
     line: 'export PATH="$PATH:/home/pi/.local/bin"'
-
-# Specifying a line w/o a regex parameter will append to the file
-- name: Disable wireless interface power saving mode
-  become: yes
-  lineinfile:
-    dest: /etc/network/interfaces
-    line: 'wireless-power off'
