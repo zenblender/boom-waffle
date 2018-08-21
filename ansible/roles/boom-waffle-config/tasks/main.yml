@@ -1,5 +1,14 @@
 ---
 
-- name: Disable power-saving mode on wlan0
+- name: Disable power-saving mode on wlan0 / wlan1 at boot
   become: yes
-  shell: iw dev wlan0 set power_save off
+  blockinfile:
+    dest: '/etc/rc.local'
+    insertbefore: 'exit 0'
+    block: |
+      iw dev wlan0 set power_save off || true
+      iw dev wlan1 set power_save off || true
+
+- name: Disable power-saving mode on wlan0 / wlan1 now
+  become: yes
+  shell: iw dev wlan0 set power_save off || true; iw dev wlan1 set power_save off || true
