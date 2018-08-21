@@ -16,3 +16,10 @@ boom-deploy-server() {
   rad-yellow "Deploying server containers with deploy.sh script"
   /home/pi/boom-waffle/deploy/server/deploy.sh
 }
+
+### boom-logs - view container logs
+boom-logs() {
+  rad-yellow "Showing container logs"
+  cd "/home/pi/boom-waffle/deploy/server/"
+  docker-compose logs -f
+}

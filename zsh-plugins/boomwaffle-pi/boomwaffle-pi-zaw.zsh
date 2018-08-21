@@ -11,11 +11,13 @@ function zaw-src-rad-boomwaffle-pi() {
     candidates=(\
       "build-all" \
       "deploy" \
+      "logs" \
     )
 
     cand_descriptions=(\
       "build all images" \
       "deploy server" \
+      "logs" \
     )
 
     actions=(\
@@ -36,6 +38,8 @@ function zaw-rad-boomwaffle-pi-run-command() {
     boom-build-all
   elif [[ $1 == 'deploy' ]]; then
     boom-deploy-server
+  elif [[ $1 == 'logs' ]]; then
+    boom-logs
   fi
 }
 
