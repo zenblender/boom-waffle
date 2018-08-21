@@ -24,11 +24,14 @@ boom-watch() {
 typeset -A BOOMWAFFLE_LIST
 BOOMWAFFLE_LIST=()
 boomwaffle-register() {
+  # Make sure raspberrypi.local is always at the end of the list
+  BOOMWAFFLE_LIST=("${BOOMWAFFLE_LIST[@]/raspberrypi.local}")
   BOOMWAFFLE_LIST+=($1)
+  BOOMWAFFLE_LIST+=('raspberrypi.local')
 }
 
 boomwaffle-clear() {
-  BOOMWAFFLE_LIST=()
+  BOOMWAFFLE_LIST=('raspberrypi.local')
 }
 
 boomwaffle-list() {
