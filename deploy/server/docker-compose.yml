@@ -2,7 +2,7 @@ version: '3.2'
 
 services:
   shairport-sync:
-    image: shairport-sync
+    image: brandonfryslie/shairport-sync:latest
     privileged: true
     network_mode: host
     volumes:
@@ -10,7 +10,7 @@ services:
       - tmp-volume:/tmp
 
   snapcast-server:
-    image:  snapcast-server
+    image: brandonfryslie/snapcast-server:latest
     privileged: true
     network_mode: host
     depends_on:
@@ -20,7 +20,7 @@ services:
       - tmp-volume:/tmp
 
   snapcast-client:
-    image: snapcast-client
+    image: brandonfryslie/snapcast-client:latest
     privileged: true
     network_mode: host
     environment:

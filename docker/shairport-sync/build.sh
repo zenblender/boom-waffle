@@ -1,3 +1,7 @@
 #!/bin/bash -el
 
-docker build -t shairport-sync .
+image_name="brandonfryslie/shairport-sync"
+
+docker build \
+  -t "${image_name}" \
+  .
