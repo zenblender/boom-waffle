@@ -4,11 +4,15 @@ export PATH="${PATH}:${BOOMWAFFLE_PATH}/bin"
 
 export BOOMWAFFLE_PATH="${BOOMWAFFLE_PATH:-"${HOME}/code/boom-waffle"}"
 
-# Add your boomwaffle ssh key to the ssh agent
+### boom-ssh - adds the boomwaffle ssh key to your agent
+### takes no arguments
 boom-ssh() {
   eval $("${BOOMWAFFLE_PATH}/bin/add-ssh.sh")
 }
 
+### boom-watch - watches the boomwaffle directory for changes and rsyncs the repo to the raspberry pi
+###
+### Example: boom-watch your-boomwaffle-hostname
 boom-watch() {
   "${BOOMWAFFLE_PATH}/bin/boom-watch.sh" "$@"
 }
@@ -33,4 +37,12 @@ boomwaffle-list() {
 
 waffle-status() {
   "${BOOMWAFFLE_PATH}/bin/waffle-status.rb" $(boomwaffle-list)
+}
+
+### waffle-wait-for-pi - calls the wait-for-pi.sh script
+### used by boomwaffle-dev-zaw
+###
+### Example: waffle-wait-for-pi your-boomwaffle-hostname
+waffle-wait-for-pi() {
+  "${BOOMWAFFLE_PATH}/bin/wait-for-pi.sh" $1
 }
