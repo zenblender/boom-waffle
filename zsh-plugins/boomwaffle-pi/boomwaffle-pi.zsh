@@ -10,3 +10,9 @@ boom-build-all() {
   rad-yellow "Building all boom-waffle docker images"
   /home/pi/boom-waffle/docker/build_all.sh
 }
+
+### boom-deploy-server - depoy server
+boom-deploy-server() {
+  rad-yellow "Deploying server containers with deploy.sh script"
+  /home/pi/boom-waffle/deploy/server/deploy.sh
+}
