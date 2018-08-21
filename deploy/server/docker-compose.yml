@@ -3,7 +3,6 @@ version: '3.2'
 services:
   shairport-sync:
     image: brandonfryslie/shairport-sync:latest
-    privileged: true
     network_mode: host
     volumes:
       - /var/run/dbus:/var/run/dbus
@@ -11,7 +10,6 @@ services:
 
   snapcast-server:
     image: brandonfryslie/snapcast-server:latest
-    privileged: true
     network_mode: host
     depends_on:
       - shairport-sync
@@ -21,7 +19,6 @@ services:
 
   snapcast-client:
     image: brandonfryslie/snapcast-client:latest
-    privileged: true
     network_mode: host
     environment:
       SNAPCAST_SERVER_HOSTNAME: 127.0.0.1
