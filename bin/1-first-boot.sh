@@ -50,4 +50,4 @@ new_hostname_full="${new_hostname}.local"
 "${script_path}/wait-for-pi.sh" "${new_hostname_full}"
 
 echo
-green "Your pi is now available at hostname: $(cyan "${new_hostname_full}.local")"
+green "Your pi is now available at hostname: $(cyan "${new_hostname_full}")"

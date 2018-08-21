@@ -1,0 +1,20 @@
+---
+
+- name: Update and upgrade apt packages (takes a while)
+  become: yes
+  apt:
+    upgrade: yes
+    update_cache: yes
+
+- name: Reboot Pi after apt upgrades
+  become: yes
+  shell: sleep 5 && reboot
+  async: 1
+  poll: 0
+
+- name: Wait for Pi to finish rebooting
+  wait_for_connection:
+    connect_timeout: 20
+    sleep: 5
+    delay: 5
+    timeout: 300
