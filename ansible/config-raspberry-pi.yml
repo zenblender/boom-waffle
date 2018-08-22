@@ -2,6 +2,7 @@
 
 - hosts: "{{ host | default('new_pi') }}"
   roles:
+  - apt-upgrade
   - rad-shell
   - docker
   - pi-config

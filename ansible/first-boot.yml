@@ -3,5 +3,4 @@
 - hosts: "{{ host | default('new_pi') }}"
   roles:
   - configure-ssh-keys
-  - apt-upgrade
   - set-hostname
