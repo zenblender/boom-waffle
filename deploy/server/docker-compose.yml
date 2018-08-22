@@ -14,19 +14,15 @@ services:
     depends_on:
       - shairport-sync
     volumes:
-      - /var/run/dbus:/var/run/dbus
       - tmp-volume:/tmp
 
   snapcast-client:
     image: brandonfryslie/snapcast-client:latest
     network_mode: host
     environment:
-      SNAPCAST_SERVER_HOSTNAME: 127.0.0.1
-      SOUNDCARD_ID: 24  # use 1 for default on-board audio out
+      SNAPCAST_SERVER_HOSTNAME: snapcast-server
     depends_on:
       - snapcast-server
-    volumes:
-      - /var/run/dbus:/var/run/dbus
     devices:
       - "/dev/snd/:/dev/snd/"
 

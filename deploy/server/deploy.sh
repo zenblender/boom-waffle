@@ -12,5 +12,5 @@ source "${script_path}/../../bin/_shared-scripts.sh"
 yellow "Running compose down"
 docker-compose -f "$script_path/docker-compose.yml" down -v
 
-yellow "Starting services"
+yellow "Starting hub services"
 docker-compose -f "$script_path/docker-compose.yml" up -d $@
