@@ -3,10 +3,10 @@ version: '3.2'
 services:
   snapcast-client:
     image: brandonfryslie/snapcast-client:latest
-    entrypoint: bash -c "sleep infinity"
     network_mode: host
     environment:
       SNAPCAST_SERVER_HOSTNAME: wafflemini-1.local
+      USE_AVAHI: 'true'
     volumes:
       - /var/run/dbus:/var/run/dbus
     devices:
