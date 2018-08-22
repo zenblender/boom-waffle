@@ -7,13 +7,6 @@
     group: docker
     append: yes
 
-#- name: Rsync repo to pi
-#  synchronize:
-#    src: '..'
-#    dest: /home/pi/boom-waffle
-#    recursive: yes
-#    archive: yes
-
 # Specifying a line w/o a regex parameter will append to the file
 - name: Add pip packages to .bashrc
   lineinfile:

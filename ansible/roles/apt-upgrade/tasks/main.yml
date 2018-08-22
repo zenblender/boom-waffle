@@ -5,12 +5,14 @@
   apt:
     upgrade: yes
     update_cache: yes
+  register: apt_upgraded
 
 - name: Reboot Pi after apt upgrades
   become: yes
   shell: sleep 5 && reboot
   async: 1
   poll: 0
+  when: apt_upgraded.changed
 
 - name: Wait for Pi to finish rebooting
   wait_for_connection:
@@ -18,3 +20,4 @@
     sleep: 5
     delay: 5
     timeout: 300
+  when: apt_upgraded.changed
