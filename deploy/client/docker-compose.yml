@@ -5,7 +5,7 @@ services:
     image: brandonfryslie/snapcast-client:latest
     network_mode: host
     environment:
-      SNAPCAST_SERVER_HOSTNAME: wafflemini-1.local
+      HUB_HOSTNAME: wafflemini-1.local
       USE_AVAHI: 'true'
     volumes:
       - /var/run/dbus:/var/run/dbus
