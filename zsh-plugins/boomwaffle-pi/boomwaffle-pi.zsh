@@ -17,9 +17,22 @@ boom-deploy-server() {
   /home/pi/boom-waffle/deploy/server/deploy.sh
 }
 
-### boom-logs - view container logs
-boom-logs() {
-  rad-yellow "Showing container logs"
+### boom-deploy-server - depoy server
+boom-deploy-client() {
+  rad-yellow "Deploying client containers with deploy.sh script"
+  /home/pi/boom-waffle/deploy/client/deploy.sh
+}
+
+### boom-server-logs - view container logs
+boom-server-logs() {
+  rad-yellow "Showing server logs"
   cd "/home/pi/boom-waffle/deploy/server/"
+  docker-compose logs -f
+}
+
+### boom-client-logs - view container logs
+boom-client-logs() {
+  rad-yellow "Showing client logs"
+  cd "/home/pi/boom-waffle/deploy/client/"
   docker-compose logs -f
 }
