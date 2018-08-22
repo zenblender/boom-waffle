@@ -12,3 +12,11 @@
 - name: Disable power-saving mode on wlan0 / wlan1 now
   become: yes
   shell: iw dev wlan0 set power_save off || true; iw dev wlan1 set power_save off || true
+
+- name: Pull shairport & snapcast docker images
+  docker_image:
+    name: '{{ item }}'
+  with_items:
+  - brandonfryslie/snapcast-client
+  - brandonfryslie/snapcast-server
+  - brandonfryslie/shairport-sync
