@@ -11,8 +11,28 @@ boom-build-all() {
   /home/pi/boom-waffle/docker/build_all.sh
 }
 
-### boom-deploy-server - depoy server
-boom-deploy-server() {
-  rad-yellow "Deploying server containers with deploy.sh script"
-  /home/pi/boom-waffle/deploy/server/deploy.sh
+### boom-deploy-hub - depoy hub
+boom-deploy-hub() {
+  rad-yellow "Deploying hub containers with deploy.sh script"
+  /home/pi/boom-waffle/deploy/hub/deploy.sh
+}
+
+### boom-deploy-client - deploy client
+boom-deploy-client() {
+  rad-yellow "Deploying client containers with deploy.sh script"
+  /home/pi/boom-waffle/deploy/client/deploy.sh
+}
+
+### boom-hub-logs - view container logs
+boom-hub-logs() {
+  rad-yellow "Showing hub logs"
+  cd "/home/pi/boom-waffle/deploy/hub/"
+  docker-compose logs -f
+}
+
+### boom-client-logs - view container logs
+boom-client-logs() {
+  rad-yellow "Showing client logs"
+  cd "/home/pi/boom-waffle/deploy/client/"
+  docker-compose logs -f
 }

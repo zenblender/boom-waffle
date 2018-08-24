@@ -10,12 +10,18 @@ function zaw-src-rad-boomwaffle-pi() {
     local title="actions"
     candidates=(\
       "build-all" \
-      "deploy" \
+      "deploy-hub" \
+      "deploy-client" \
+      "logs-hub" \
+      "logs-drone" \
     )
 
     cand_descriptions=(\
       "build all images" \
-      "deploy server" \
+      "deploy (hub)" \
+      "deploy (drone)" \
+      "logs (hub)" \
+      "logs (drone)" \
     )
 
     actions=(\
@@ -33,9 +39,15 @@ function zaw-src-rad-boomwaffle-pi() {
 
 function zaw-rad-boomwaffle-pi-run-command() {
   if [[ $1 == 'build-all' ]]; then
-    boom-build-all
-  elif [[ $1 == 'deploy' ]]; then
-    boom-deploy-server
+    zaw-rad-buffer-action 'boom-build-all'
+  elif [[ $1 == 'deploy-hub' ]]; then
+    zaw-rad-buffer-action 'boom-deploy-hub'
+  elif [[ $1 == 'deploy-client' ]]; then
+    zaw-rad-buffer-action 'boom-deploy-client'
+  elif [[ $1 == 'logs-hub' ]]; then
+    zaw-rad-buffer-action 'boom-hub-logs'
+  elif [[ $1 == 'logs-drone' ]]; then
+    zaw-rad-buffer-action 'boom-client-logs'
   fi
 }
 

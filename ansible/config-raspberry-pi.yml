@@ -2,7 +2,9 @@
 
 - hosts: "{{ host | default('new_pi') }}"
   roles:
+  - apt-upgrade
   - rad-shell
   - docker
+  - netdata
   - pi-config
   - boom-waffle-config

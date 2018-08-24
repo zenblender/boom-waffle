@@ -106,6 +106,7 @@ done
   flash_sd_card "${disk_to_flash}"
 
   green "Finished flashing SD card"
+  yellow "Enter your password to mount the disk and run the playbook"
   sudo diskutil mountDisk "${disk_to_flash}"
 }
 
@@ -119,6 +120,7 @@ ansible-playbook -i '127.0.0.1,' --extra-vars "ssid='${ssid}' wifi_password='${w
 green "Finished running playbook boot-to-wifi.yml"
 
 if [[ -n "${disk_to_flash}" ]]; then
+  yellow "Enter your password to unmount the disk"
   sudo diskutil unmountDisk "${disk_to_flash}"
   green "Device ${disk_to_flash} was unmounted.  You can remove it now"
 fi

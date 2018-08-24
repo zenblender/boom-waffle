@@ -1,0 +1,22 @@
+- name: Check if netdata is installed
+  shell: /usr/sbin/netdata -v
+  register: netdata_installed_status
+  ignore_errors: yes
+  changed_when: false
+  tags:
+  - netdata
+
+- name: Download Netdata install script
+  get_url:
+    url: https://my-netdata.io/kickstart.sh
+    dest: /tmp/kickstart.sh
+    mode: 0777
+  when: netdata_installed_status.rc != 0
+  tags:
+  - netdata
+
+- name: Install netdata.io
+  shell: /tmp/kickstart.sh all --dont-wait
+  when: netdata_installed_status.rc != 0
+  tags:
+  - netdata

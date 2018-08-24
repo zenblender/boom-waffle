@@ -10,7 +10,7 @@ RUN dpkg -i --force-all snapclient_${SNAPCAST_VERSION}_armhf.deb
 RUN apt-get -f install -y
 
 RUN apt-get update \
-  && apt-get install alsa-base alsa-utils iputils-ping -y
+  && apt-get install alsa-base alsa-utils iputils-ping avahi-utils -y
 
 COPY files/start.sh /start.sh
 

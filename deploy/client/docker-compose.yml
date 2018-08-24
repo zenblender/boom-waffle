@@ -1,0 +1,13 @@
+version: '3.2'
+
+services:
+  snapcast-client:
+    image: brandonfryslie/snapcast-client:latest
+    network_mode: host
+    environment:
+      HUB_HOSTNAME: wafflemini-1.local
+      USE_AVAHI: 'true'
+    volumes:
+      - /var/run/dbus:/var/run/dbus
+    devices:
+      - "/dev/snd/:/dev/snd/"
