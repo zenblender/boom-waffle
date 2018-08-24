@@ -21,7 +21,7 @@ services:
     image: brandonfryslie/snapcast-client:latest
     network_mode: host
     environment:
-      HUB_HOSTNAME: snapcast-server
+      HUB_HOSTNAME: 127.0.0.1
     volumes:
       - /var/run/dbus:/var/run/dbus
     depends_on:
