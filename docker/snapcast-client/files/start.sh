@@ -2,7 +2,8 @@
 
 # Setting this to 24 allows it to use the USB sound card when it is plugged in,
 # otherwise it will use onboard sound
-SOUNDCARD_ID=24
+# Default to 24 but allow overriding in the compose file
+SOUNDCARD_ID="${SOUNDCARD_ID:-24}"
 
 [[ -z "${HUB_HOSTNAME}" ]] && { echo 'Error: Must set $HUB_HOSTNAME'; exit 1; }
 
