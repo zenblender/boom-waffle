@@ -1,7 +1,8 @@
 - name: Check if netdata is installed
-  shell: 'type netdata'
+  shell: /usr/sbin/netdata -v
   register: netdata_installed_status
   ignore_errors: yes
+  changed_when: false
   tags:
   - netdata
 
