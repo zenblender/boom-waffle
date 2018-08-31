@@ -1,0 +1,21 @@
+---
+
+- name: 'Transfer locale scripts'
+  become: yes
+  become_method: sudo
+  copy: src=./ dest=/home/pi/init/ mode=0755
+
+- name: 'Set locale'
+  become: yes
+  become_method: sudo
+  shell: /home/pi/init/set-locale.sh
+
+- name: 'Set timezone'
+  become: yes
+  become_method: sudo
+  shell: /home/pi/init/set-timezone.sh
+
+- name: 'Set keyboard layout'
+  become: yes
+  become_method: sudo
+  shell: /home/pi/init/set-keyboard-layout.sh
