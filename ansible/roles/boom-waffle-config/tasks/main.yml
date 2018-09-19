@@ -1,18 +1,5 @@
 ---
 
-- name: Disable power-saving mode on wlan0 / wlan1 at boot
-  become: yes
-  blockinfile:
-    dest: '/etc/rc.local'
-    insertafter: '\/bin\/'  # after /bin/sh or /bin/bash line
-    block: |
-      iw dev wlan0 set power_save off || true
-      iw dev wlan1 set power_save off || true
-
-- name: Disable power-saving mode on wlan0 / wlan1 now
-  become: yes
-  shell: iw dev wlan0 set power_save off || true; iw dev wlan1 set power_save off || true
-
 - name: Pull shairport & snapcast docker images
   docker_image:
     name: '{{ item }}'
@@ -20,3 +7,19 @@
   - brandonfryslie/snapcast-client
   - brandonfryslie/snapcast-server
   - brandonfryslie/shairport-sync
+
+- name: Transfer Boom-waffle startup scripts
+  become: yes
+  become_method: sudo
+  copy: src=./ dest=/home/pi/boom-waffle-startup/ mode=0755
+
+- name: Enable Boom-waffle common startup script
+  become: yes
+  lineinfile:
+    dest: '/etc/rc.local'
+    insertafter: '\/bin\/'  # after /bin/sh or /bin/bash line
+    line: '/home/pi/boom-waffle-startup/common-start-boom-waffle.sh'
+
+- name: Run Boom-waffle common startup script now
+  become: yes
+  shell: '/home/pi/boom-waffle-startup/common-start-boom-waffle.sh'
