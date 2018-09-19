@@ -1,0 +1,7 @@
+---
+
+- name: Change login password
+  become: yes
+  user:
+    name: pi
+    password: "{{ lookup('file', '../secrets/login_password') }}"
