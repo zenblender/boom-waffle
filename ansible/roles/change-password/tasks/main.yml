@@ -1,0 +1,5 @@
+---
+
+- name: Change pi login password
+  become: yes
+  shell: echo pi:"{{ lookup('file', '../secrets/login_password') }}" | chpasswd
